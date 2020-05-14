@@ -25,13 +25,10 @@ public class MainController {
     }
 
     @GetMapping("/increment_wr")
-    public Fighter incrementWinRate(@RequestParam Integer id) {
-        Optional<Fighter> fighterOpt = fighterRepository.findById(id);
-        if (fighterOpt.isPresent()) {
-            Fighter fighter = fighterOpt.get();
-            fighter.incrementWinRate();
-            fighterRepository.save(fighter);
-        }
-        return fighterOpt.get();
+    public Fighter incrementWinRate(@RequestParam Integer id, String name) {
+        Fighter fighter = fighterRepository.findById(id).orElse(new Fighter(id, name));
+        fighter.incrementWinRate();
+        this.fighterRepository.save(fighter);
+        return fighter;
     }
 }
