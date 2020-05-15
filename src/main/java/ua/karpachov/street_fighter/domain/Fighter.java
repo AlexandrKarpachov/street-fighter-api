@@ -19,8 +19,7 @@ public class Fighter {
     public Fighter() {
     }
 
-    public Fighter(int id, String name) {
-        this.id = id;
+    public Fighter(String name) {
         this.name = name;
     }
 
