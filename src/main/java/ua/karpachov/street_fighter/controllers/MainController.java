@@ -27,7 +27,8 @@ public class MainController {
     }
 
     @PostMapping("/increase_wr")
-    public Fighter incrementWinRate(String name) {
+    public Fighter incrementWinRate(@RequestBody String name) {
+        name = name.substring(1, name.lastIndexOf('\"'));
         Fighter fighter = fighterRepository.findByName(name).orElse(new Fighter(name));
         fighter.incrementWinRate();
         this.fighterRepository.save(fighter);
