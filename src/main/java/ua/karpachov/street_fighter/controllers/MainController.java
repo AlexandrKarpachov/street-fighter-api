@@ -1,5 +1,6 @@
 package ua.karpachov.street_fighter.controllers;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import ua.karpachov.street_fighter.dao.FighterRepository;
 import ua.karpachov.street_fighter.domain.Fighter;
@@ -19,11 +20,13 @@ public class MainController {
         this.fighterRepository = fighterRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/get_fighters")
     public Iterable<Fighter> greeting() {
-        return this.fighterRepository.findAll();
+        return this.fighterRepository.findAll(Sort.by(Sort.Direction.DESC, "wins"));
     }
 
+    @CrossOrigin
     @GetMapping("/increase_wr")
     public Fighter incrementWinRate(String name) {
         Fighter fighter = fighterRepository.findByName(name).orElse(new Fighter(name));
