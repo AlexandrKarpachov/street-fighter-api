@@ -27,7 +27,7 @@ public class MainController {
     }
 
     @CrossOrigin
-    @GetMapping("/increase_wr")
+    @PostMapping("/increase_wr")
     public Fighter incrementWinRate(String name) {
         Fighter fighter = fighterRepository.findByName(name).orElse(new Fighter(name));
         fighter.incrementWinRate();
