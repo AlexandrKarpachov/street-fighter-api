@@ -11,6 +11,7 @@ import ua.karpachov.street_fighter.domain.Fighter;
  * @version 1.0
  * @since 14.05.2020
  */
+@CrossOrigin
 @RestController
 public class MainController {
 
@@ -20,13 +21,11 @@ public class MainController {
         this.fighterRepository = fighterRepository;
     }
 
-    @CrossOrigin
     @GetMapping("/get_fighters")
     public Iterable<Fighter> greeting() {
         return this.fighterRepository.findAll(Sort.by(Sort.Direction.DESC, "wins"));
     }
 
-    @CrossOrigin
     @PostMapping("/increase_wr")
     public Fighter incrementWinRate(String name) {
         Fighter fighter = fighterRepository.findByName(name).orElse(new Fighter(name));
