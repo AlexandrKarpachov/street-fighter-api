@@ -4,10 +4,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import ua.karpachov.street_fighter.dao.FighterRepository;
 import ua.karpachov.street_fighter.domain.Fighter;
-import ua.karpachov.street_fighter.domain.Fighters;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -26,13 +22,8 @@ public class MainController {
 
     @CrossOrigin
     @GetMapping("/get_fighters")
-    public Fighters greeting() {
-        List<Fighter> fighters = new ArrayList<>();
-        Iterable<Fighter> iterable =
-                this.fighterRepository.findAll(Sort.by(Sort.Direction.DESC, "wins"));
-        iterable.forEach(fighters::add);
-
-        return new Fighters(fighters);
+    public Iterable<Fighter> greeting() {
+        return this.fighterRepository.findAll(Sort.by(Sort.Direction.DESC, "wins"));
     }
 
     @CrossOrigin
